@@ -8,6 +8,8 @@ declare global {
 		// interface PageState {}
 		// interface Platform {}
 	}
+	declare const __VERSION__: string;
+	declare const __COMMIT__: string;
 }
 
 export {};

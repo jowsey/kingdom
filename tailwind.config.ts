@@ -4,7 +4,17 @@ export default {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 
 	theme: {
-		extend: {}
+		extend: {
+			fontFamily: {
+				'serif': ['Playfair Display', 'serif'],
+				'sans': ['Cabin', 'sans-serif']
+			},
+			backgroundImage: () => {
+				return {
+					'tile': "url('/Tile32.png')",
+				}
+			}
+		},
 	},
 
 	plugins: []
