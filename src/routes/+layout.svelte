@@ -40,7 +40,9 @@
 				{game.DateState.format('YYYY')} - {game.DateState.month()} - {game.DateState.date()}<br />
 				<span class="text-sm">{GenerateDemonym(game.KingdomState.name)} Era</span>
 			</p>
+
 			<hr class="mx-auto my-4 w-1/2 border-t-zinc-500" />
+
 			<MenuItem route="/options" label="Options" icon={Cog} />
 		</div>
 	</div>
