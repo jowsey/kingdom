@@ -21,7 +21,7 @@
 	<div
 		class="m-4 flex w-48 flex-col rounded-md border border-zinc-500/75 bg-gradient-to-tl from-zinc-700/25 to-zinc-800/25 px-3 py-4 backdrop-blur-sm"
 	>
-		<div class="flex flex-row items-baseline justify-between px-1">
+		<div class="flex flex-row items-baseline justify-between gap-x-2 px-1">
 			<a href="/" class="font-serif text-2xl transition-all hover:text-orange-300 active:translate-y-0.5">kingdom</a>
 			<p class="rounded-lg border border-zinc-600 px-2 text-xs" title={__COMMIT__}>
 				v{__VERSION__}
@@ -44,7 +44,7 @@
 			<MenuItem route="/options" label="Options" icon={Cog} />
 		</div>
 	</div>
-	<div class="h-full flex-grow overflow-auto px-6 py-8">
+	<div class="container h-full flex-grow overflow-auto px-6 py-8">
 		{@render children()}
 	</div>
 </div>

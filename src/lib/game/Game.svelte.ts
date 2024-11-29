@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 
 class Game {
+	public DaysPerSecond: number = 1.2;
 	public DateState = $state(dayjs().year(1).month(1).date(1));
 	public KingdomState = $state({
 		name: 'Unnamedia',
@@ -22,7 +23,7 @@ class Game {
 	public RunLoop() {
 		this._loopInterval = setInterval(() => {
 			this.DateState = this.DateState.add(1, 'day');
-		}, 1250);
+		}, 1000 / this.DaysPerSecond);
 	}
 
 	public StopLoop() {
