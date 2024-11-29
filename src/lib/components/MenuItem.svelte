@@ -1,21 +1,24 @@
 <script lang="ts">
-	import type { Snippet } from 'svelte';
 	import { page } from '$app/stores';
+	import { type Icon } from 'lucide-svelte';
 
 	interface Props {
-		children: Snippet;
 		route: string;
 		label: string;
+		icon?: typeof Icon;
 	}
 
-	let { children, route, label }: Props = $props();
+	let { route, label, icon }: Props = $props();
 	let active = $derived($page.url.pathname === route);
 </script>
 
 <a
 	href={route}
-	class={`group flex w-full gap-x-3 rounded-xl border border-zinc-500 border-opacity-0 bg-black bg-opacity-0 px-2.5 py-2 transition-all duration-75 hover:bg-opacity-25 active:translate-y-0.5 ${active ? '!bg-white text-black' : ''}`}
+	class={`group mb-2 flex w-full gap-x-3 rounded-xl border border-zinc-500 border-opacity-0 bg-black bg-opacity-0 px-2.5 py-2 transition-all hover:bg-opacity-25 active:translate-y-0.5 ${active ? '!bg-white text-black' : ''}`}
 >
-	{@render children?.()}
+	{#if icon}
+		{@const Icon = icon}
+		<Icon class="transition-transform group-hover:-rotate-6" />
+	{/if}
 	<p>{label}</p>
 </a>

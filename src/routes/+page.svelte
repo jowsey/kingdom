@@ -3,5 +3,5 @@
 </script>
 
 <p class="font-serif text-2xl">
-	The people of {kingdomState.name} are content.
+	The sun rises over {kingdomState.name}.
 </p>

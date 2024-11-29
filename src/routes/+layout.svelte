@@ -1,17 +1,17 @@
 <script lang="ts">
 	import '../app.css';
-	import { Castle, Cog } from 'lucide-svelte';
+	import { Brain, Castle, Cog, Handshake, PersonStanding } from 'lucide-svelte';
 
 	let { children } = $props();
 	import MenuItem from '$lib/components/MenuItem.svelte';
 	import { kingdomState } from '$lib/state.svelte';
 </script>
 
-<head>
-	<title>kingdom</title>
-</head>
+<svelte:head>
+	<title>kingdom: {kingdomState.name}</title>
+</svelte:head>
 
-<div class="flex h-screen flex-row bg-tile text-white select-none">
+<div class="flex h-screen select-none flex-row bg-tile text-white">
 	<div
 		class="m-4 flex w-48 flex-col rounded-md border border-zinc-500/75 bg-gradient-to-tl from-zinc-700/25 to-zinc-800/25 px-3 py-4 backdrop-blur-sm"
 	>
@@ -22,18 +22,15 @@
 			</p>
 		</div>
 
-		<input type="text" maxlength="18" bind:value={kingdomState.name} class="bg-transparent text-center mt-4 outline-none" spellcheck="false">
+		<hr class="mx-auto my-4 w-1/2 border-t-zinc-500" />
 
-		<hr class="my-4 border-t-zinc-500 w-1/2 mx-auto" />
-
-		<MenuItem route="/" label="Kingdom">
-			<Castle class="transition-all group-hover:scale-110" />
-		</MenuItem>
+		<MenuItem route="/" label="Kingdom" icon={Castle} />
+		<MenuItem route="/people" label="People" icon={PersonStanding} />
+		<MenuItem route="/council" label="Council" icon={Handshake} />
+		<MenuItem route="/technology" label="Technology" icon={Brain} />
 
 		<div class="mt-auto">
-			<MenuItem route="/options" label="Options">
-				<Cog class="transition-all group-hover:rotate-45" />
-			</MenuItem>
+			<MenuItem route="/options" label="Options" icon={Cog} />
 		</div>
 	</div>
 	<div class="h-full flex-grow overflow-auto px-6 py-8">
