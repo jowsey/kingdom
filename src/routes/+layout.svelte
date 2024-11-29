@@ -1,14 +1,20 @@
 <script lang="ts">
 	import '../app.css';
-	import { Brain, Castle, Cog, Handshake, PersonStanding } from 'lucide-svelte';
+	import MenuItem from '$lib/components/MenuItem.svelte';
+	import { Brain, Castle, Cog, Handshake, PersonStanding } from 'lucide-svelte/icons';
 
 	let { children } = $props();
-	import MenuItem from '$lib/components/MenuItem.svelte';
-	import { kingdomState } from '$lib/state.svelte';
+	import { game } from '$lib/game/Game.svelte';
+	import { GenerateDemonym } from '$lib/util/Demonym.js';
+
+	$effect(() => {
+		game.RunLoop();
+		return () => game.StopLoop();
+	});
 </script>
 
 <svelte:head>
-	<title>kingdom: {kingdomState.name}</title>
+	<title>kingdom: {game.KingdomState.name}</title>
 </svelte:head>
 
 <div class="flex h-screen select-none flex-row bg-tile text-white">
@@ -30,6 +36,11 @@
 		<MenuItem route="/technology" label="Technology" icon={Brain} />
 
 		<div class="mt-auto">
+			<p class="text-center">
+				{game.DateState.format('YYYY')} - {game.DateState.month()} - {game.DateState.date()}<br />
+				<span class="text-sm">{GenerateDemonym(game.KingdomState.name)} Era</span>
+			</p>
+			<hr class="mx-auto my-4 w-1/2 border-t-zinc-500" />
 			<MenuItem route="/options" label="Options" icon={Cog} />
 		</div>
 	</div>

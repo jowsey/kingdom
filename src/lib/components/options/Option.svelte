@@ -10,6 +10,6 @@
 </script>
 
 <div class="my-4 border-l border-zinc-500/25 pl-4">
-	<p class="text-lg">{label}</p>
+	<p class="text-xl font-medium">{label}</p>
 	{@render children?.()}
 </div>
