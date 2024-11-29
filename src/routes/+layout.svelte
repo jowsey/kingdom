@@ -4,24 +4,27 @@
 
 	let { children } = $props();
 	import MenuItem from '$lib/components/MenuItem.svelte';
+	import { kingdomState } from '$lib/state.svelte';
 </script>
 
 <head>
 	<title>kingdom</title>
 </head>
 
-<div class="flex h-screen flex-row bg-tile text-white">
+<div class="flex h-screen flex-row bg-tile text-white select-none">
 	<div
 		class="m-4 flex w-48 flex-col rounded-md border border-zinc-500/75 bg-gradient-to-tl from-zinc-700/25 to-zinc-800/25 px-3 py-4 backdrop-blur-sm"
 	>
-		<div class="flex flex-row items-baseline justify-between">
+		<div class="flex flex-row items-baseline justify-between px-1">
 			<a href="/" class="font-serif text-2xl transition-all hover:text-orange-300 active:translate-y-0.5">kingdom</a>
 			<p class="rounded-lg border border-zinc-600 px-2 text-xs" title={__COMMIT__}>
 				v{__VERSION__}
 			</p>
 		</div>
 
-		<hr class="my-4 border-t-zinc-500" />
+		<input type="text" maxlength="18" bind:value={kingdomState.name} class="bg-transparent text-center mt-4 outline-none" spellcheck="false">
+
+		<hr class="my-4 border-t-zinc-500 w-1/2 mx-auto" />
 
 		<MenuItem route="/" label="Kingdom">
 			<Castle class="transition-all group-hover:scale-110" />
