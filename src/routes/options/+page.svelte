@@ -5,7 +5,7 @@
 
 	onDestroy(() => {
 		if (game.KingdomState.name === '') {
-			game.KingdomState.name = 'Aetheria';
+			game.KingdomState.name = 'Unnamedia';
 		}
 	});
 </script>

@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 class Game {
 	public DateState = $state(dayjs().year(1).month(1).date(1));
 	public KingdomState = $state({
-		name: 'Aetheria',
+		name: 'Unnamedia',
 		people: {
 			peasants: 0,
 			artisans: 0,
