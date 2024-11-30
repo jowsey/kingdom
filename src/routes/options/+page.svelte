@@ -5,7 +5,7 @@
 
 	onDestroy(() => {
 		if (game.KingdomState.name === '') {
-			game.KingdomState.name = Game.DefaultKingdomState.name;
+			game.KingdomState.name = Game.Defaults.KingdomState.name;
 		}
 	});
 </script>

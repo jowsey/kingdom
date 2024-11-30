@@ -1,22 +1,24 @@
 import dayjs from 'dayjs';
 
 class Game {
-	public static readonly DefaultKingdomState = {
-		name: 'Unnamedia',
-		people: {
-			peasants: 0,
-			artisans: 0,
-			merchants: 0,
-			get population() {
-				return this.peasants + this.artisans + this.merchants;
-			}
-		},
-		resources: {}
+	public static readonly Defaults = {
+		KingdomState: {
+			name: 'Unnamedia',
+			people: {
+				peasants: 0,
+				artisans: 0,
+				merchants: 0,
+				get population() {
+					return this.peasants + this.artisans + this.merchants;
+				}
+			},
+			resources: {}
+		}
 	};
 
 	public DaysPerSecond: number = 1.1;
 	public DateState = $state(dayjs().year(1).month(1).date(1));
-	public KingdomState = $state(Game.DefaultKingdomState);
+	public KingdomState = $state(Game.Defaults.KingdomState);
 
 	private _loopInterval?: NodeJS.Timer;
 
