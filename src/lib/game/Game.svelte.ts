@@ -1,9 +1,7 @@
 import dayjs from 'dayjs';
 
 class Game {
-	public DaysPerSecond: number = 1.2;
-	public DateState = $state(dayjs().year(1).month(1).date(1));
-	public KingdomState = $state({
+	public static readonly DefaultKingdomState = {
 		name: 'Unnamedia',
 		people: {
 			peasants: 0,
@@ -14,7 +12,11 @@ class Game {
 			}
 		},
 		resources: {}
-	});
+	};
+
+	public DaysPerSecond: number = 1.1;
+	public DateState = $state(dayjs().year(1).month(1).date(1));
+	public KingdomState = $state(Game.DefaultKingdomState);
 
 	private _loopInterval?: NodeJS.Timer;
 
@@ -27,8 +29,9 @@ class Game {
 	}
 
 	public StopLoop() {
-		clearInterval(this._loopInterval);
+		if (this._loopInterval) clearInterval(this._loopInterval);
 	}
 }
 
-export const game = new Game();
+const game = new Game();
+export { Game, game };

@@ -11,19 +11,17 @@
 	let { icon, name, population, description }: Props = $props();
 </script>
 
-<div class="flex flex-col">
-	<div class="rounded-lg border border-zinc-500/25 bg-zinc-800/25 p-4 backdrop-blur-sm">
-		<div class="mb-2 flex items-baseline justify-between">
-			<div class="flex items-center gap-x-2">
-				{#if icon}
-					{@const Icon = icon}
-					<Icon class="h-4 w-4" />
-				{/if}
-				<p class="font-serif text-lg">{name}</p>
-			</div>
-			<p class="text-sm">{population} pop.</p>
+<div class="rounded-lg border border-zinc-500/25 bg-zinc-800/25 p-4 backdrop-blur-sm">
+	<div class="mb-2 flex items-baseline justify-between">
+		<div class="flex items-center gap-x-2">
+			{#if icon}
+				{@const Icon = icon}
+				<Icon class="h-4 w-4" />
+			{/if}
+			<p class="font-serif text-lg">{name}</p>
 		</div>
-
-		<p class="text-zinc-500">{description}</p>
+		<p class="text-sm">{population.toLocaleString()} pop.</p>
 	</div>
+
+	<p class="text-zinc-500">{description}</p>
 </div>

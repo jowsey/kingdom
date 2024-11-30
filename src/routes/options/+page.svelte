@@ -1,11 +1,11 @@
 <script lang="ts">
 	import Option from '$lib/components/options/Option.svelte';
-	import { game } from '$lib/game/Game.svelte';
+	import { Game, game } from '$lib/game/Game.svelte';
 	import { onDestroy } from 'svelte';
 
 	onDestroy(() => {
 		if (game.KingdomState.name === '') {
-			game.KingdomState.name = 'Unnamedia';
+			game.KingdomState.name = Game.DefaultKingdomState.name;
 		}
 	});
 </script>
@@ -16,7 +16,7 @@
 	The Kingdom of
 	<input
 		maxlength="32"
-		class="w-96 border-b border-zinc-500/75 bg-transparent p-2 font-serif text-xl outline-none"
+		class="w-full max-w-96 border-b border-zinc-500/75 bg-transparent p-2 font-serif text-xl outline-none"
 		placeholder="your kingdom"
 		spellcheck="false"
 		bind:value={game.KingdomState.name}
