@@ -1,0 +1,18 @@
+export const TopBarTexts = [
+	"also try minecraft!",
+	"also try terraria!",
+	'not even the best game on the site',
+	'not a virus, but it might infect your brain',
+	'tom says hi',
+	'known by the state of california to cause cancer, birth defects or other reproductive harm',
+	'not a cult, usually',
+	"probably a cult",
+	"what's good",
+	'you are not a fish',
+	'you are a fish',
+	'you might be a fish',
+	'🐇',
+	'🐈',
+	"🐟",
+	"TIP: be good",
+];

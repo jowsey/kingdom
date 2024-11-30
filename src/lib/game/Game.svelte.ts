@@ -20,9 +20,7 @@ class Game {
 	public DateState = $state(dayjs().year(1).month(1).date(1));
 	public KingdomState = $state(Game.Defaults.KingdomState);
 
-	private _loopInterval?: NodeJS.Timer;
-
-	constructor() {}
+	private _loopInterval?: ReturnType<typeof setInterval>;
 
 	public RunLoop() {
 		this._loopInterval = setInterval(() => {
