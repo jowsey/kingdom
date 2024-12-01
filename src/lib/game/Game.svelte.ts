@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 
 class Game {
 	public static readonly Defaults = {
-		KingdomState: {
+		PlayerCity: {
 			name: 'Unnamedia',
 			people: {
 				peasants: 0,
@@ -12,13 +12,12 @@ class Game {
 					return this.peasants + this.artisans + this.merchants;
 				}
 			},
-			resources: {}
 		}
 	};
 
 	public DaysPerSecond: number = 1.1;
 	public DateState = $state(dayjs().year(1).month(1).date(1));
-	public KingdomState = $state(Game.Defaults.KingdomState);
+	public PlayerCity = $state(Game.Defaults.PlayerCity);
 
 	private _loopInterval?: ReturnType<typeof setInterval>;
 

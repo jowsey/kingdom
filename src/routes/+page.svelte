@@ -3,5 +3,5 @@
 </script>
 
 <p class="font-serif text-2xl">
-	The sun rises over {game.KingdomState.name}.
+	The sun rises over {game.PlayerCity.name}.
 </p>

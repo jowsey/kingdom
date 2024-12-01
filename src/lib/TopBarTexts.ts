@@ -4,7 +4,7 @@ export const TopBarTexts = [
 	'not even the best game on the site',
 	'not a virus, but it might infect your brain',
 	'tom says hi',
-	'known by the state of california to cause cancer, birth defects or other reproductive harm',
+	'known by the state of california',
 	'not a cult, usually',
 	"probably a cult",
 	"what's good",

@@ -2,7 +2,7 @@
 	import '../app.css';
 	import { onMount } from 'svelte';
 	import { game } from '$lib/game/Game.svelte';
-	import { GenerateDemonym } from '$lib/util/Demonym.js';
+	import { GenerateDemonym, GetCityClass, GetNextThreshold, toTitleCase } from '$lib/util/Util';
 	import MenuItem from '$lib/components/MenuItem.svelte';
 	import { ExternalLink, Brain, Castle, Cog, Handshake, PersonStanding } from 'lucide-svelte';
 	import { TopBarTexts } from '$lib/TopBarTexts';
@@ -33,21 +33,18 @@
 </script>
 
 <svelte:head>
-	<title>kingdom: {game.KingdomState.name}</title>
+	<title>kingdom: {game.PlayerCity.name}</title>
 </svelte:head>
 
 <div class="flex h-screen select-none flex-col bg-tile text-white">
-	<div
-		id="topbar"
-		class="flex h-6 w-full items-center justify-between gap-x-8 border-b border-zinc-800 bg-black/25 px-8 font-mono text-sm"
-	>
+	<div id="topbar" class="flex h-6 w-full items-center justify-between gap-x-8 border-b border-zinc-800 bg-black/25 px-8 font-mono text-sm">
 		<div class="gap-x-8">
 			<a target="_blank" href="https://tom.cafe">
 				https://tom.cafe
 				<ExternalLink class="h-4" />
 			</a>
 		</div>
-		<p class="opacity-50" title={`#${TopBarTexts.indexOf(topText) + 1}`}>{topText}</p>
+		<p class="text-xs opacity-50" title={`#${TopBarTexts.indexOf(topText) + 1}`}>{topText}</p>
 	</div>
 
 	<div class="flex flex-grow">
@@ -61,24 +58,36 @@
 				</p>
 			</div>
 
-			<hr class="mx-auto my-4 w-1/2 border-t-zinc-500" />
+			<div class="my-2 text-center">
+				<p class="text-sm">{toTitleCase(GetCityClass(game.PlayerCity.people.population))}</p>
+				{#if GetNextThreshold(game.PlayerCity.people.population) > 0}
+					<p class="text-xs opacity-50">
+						<span class="font-serif">{game.PlayerCity.people.population.toLocaleString()}</span> /
+						<span class="font-serif">{GetNextThreshold(game.PlayerCity.people.population).toLocaleString()}</span>
+					</p>
+				{/if}
+			</div>
 
-			<MenuItem route="/" label="Kingdom" icon={Castle} />
+			<hr class="mx-auto mb-2 w-1/2 border-t-zinc-500" />
+
+			<MenuItem route="/" label="Overview" icon={Castle} />
 			<MenuItem route="/people" label="People" icon={PersonStanding} />
 			<MenuItem route="/council" label="Council" icon={Handshake} />
 			<MenuItem route="/technology" label="Technology" icon={Brain} />
 
 			<div class="mt-auto">
-				<p class="text-center">
-					{game.DateState.format('YYYY')} - {game.DateState.month()} - {game.DateState.date()}<br />
-					<span class="text-sm">{GenerateDemonym(game.KingdomState.name)} Era</span>
-				</p>
+				<div class="text-center">
+					<p>{game.DateState.format('YYYY')} - {game.DateState.format('MM')} - {game.DateState.format('DD')}</p>
+					<p class="font-serif text-sm">{GenerateDemonym(game.PlayerCity.name)} Era</p>
+				</div>
 
 				<hr class="mx-auto my-4 w-1/2 border-t-zinc-500" />
 
 				<MenuItem route="/options" label="Options" icon={Cog} />
 			</div>
 		</div>
+
+		<!-- Page content -->
 		<div class="container h-full flex-grow overflow-auto px-6 py-8">
 			{@render children()}
 		</div>
