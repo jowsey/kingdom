@@ -6,15 +6,16 @@ export default {
 	theme: {
 		extend: {
 			fontFamily: {
-				'serif': ['Playfair Display', 'serif'],
-				'sans': ['Cabin', 'sans-serif']
+				serif: ['Playfair Display', 'serif'],
+				sans: ['Cabin', 'sans-serif'],
+				mono: ['Courier Prime', 'monospace']
 			},
 			backgroundImage: () => {
 				return {
-					'tile': "url('/Tile32.png')",
-				}
+					tile: "url('/Tile32.png')"
+				};
 			}
-		},
+		}
 	},
 
 	plugins: []

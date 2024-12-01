@@ -40,8 +40,8 @@
 				<p class="text-sm">{toTitleCase(GetCityClass(game.PlayerCity.people.population))}</p>
 				{#if GetNextThreshold(game.PlayerCity.people.population) > 0}
 					<p class="text-xs opacity-50">
-						<span class="font-serif">{game.PlayerCity.people.population.toLocaleString()}</span> /
-						<span class="font-serif">{GetNextThreshold(game.PlayerCity.people.population).toLocaleString()}</span>
+						<span class="font-mono">{game.PlayerCity.people.population.toLocaleString()}</span> /
+						<span class="font-mono">{GetNextThreshold(game.PlayerCity.people.population).toLocaleString()}</span>
 					</p>
 				{/if}
 			</div>
@@ -55,7 +55,7 @@
 
 			<div class="mt-auto">
 				<div class="text-center">
-					<p>{game.Date.format('YYYY')} - {game.Date.format('MM')} - {game.Date.format('DD')}</p>
+					<p class="font-mono">{game.Date.format('YYYY')} - {game.Date.format('MM')} - {game.Date.format('DD')}</p>
 					<p class="font-serif text-sm">{GenerateDemonym(game.PlayerCity.name)} Era</p>
 				</div>
 

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { ExternalLink } from 'lucide-svelte';
-	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
 
 	const TopBarTexts = [
@@ -87,19 +86,19 @@
 
 <div
 	id="topbar"
-	class="grid h-12 w-full grid-cols-6 grid-rows-2 items-center justify-between gap-x-2 border-b border-zinc-800 bg-black/25 px-2 font-mono text-sm lg:h-6 lg:grid-rows-1 lg:px-4"
+	class="grid h-12 w-full grid-cols-6 grid-rows-2 items-center justify-between gap-x-2 border-b border-zinc-800 bg-black/25 px-4 text-sm lg:h-6 lg:grid-rows-1"
 >
-	<a class="col-span-2 flex text-blue-300 lg:col-span-1" target="_blank" href="https://tom.cafe">
+	<a class="col-span-2 flex font-mono text-blue-300 hover:text-blue-400 lg:col-span-1" target="_blank" href="https://tom.cafe">
 		https://tom.cafe
 		<ExternalLink class="h-4" />
 	</a>
 
-	<p class="col-span-6 row-start-2 text-center lg:col-span-4 lg:col-start-2 lg:row-start-1">Events will be shown here.</p>
+	<p class="col-span-6 row-start-2 text-center font-serif lg:col-span-4 lg:col-start-2 lg:row-start-1">Events will be shown here.</p>
 
 	<div class="col-span-4 items-center overflow-hidden lg:col-span-1">
 		<p
 			id="marquee"
-			class="inline-block w-fit whitespace-pre pl-[100%] pr-64 text-xs opacity-50 transition-transform ease-linear"
+			class="inline-block w-fit whitespace-pre pl-[100%] pr-64 font-mono text-xs opacity-50 transition-transform ease-linear"
 			bind:this={textElement}
 			ontransitionend={UpdateTopText}
 		>
@@ -107,6 +106,3 @@
 		</p>
 	</div>
 </div>
-
-<style lang="postcss">
-</style>
