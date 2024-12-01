@@ -1,4 +1,6 @@
 export function GenerateDemonym(name: string): string {
+	name = name.trim();
+
 	if (name.length === 0) return '???';
 
 	if (name.split(' ').length > 1) {

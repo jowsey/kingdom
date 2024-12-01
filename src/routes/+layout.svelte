@@ -3,8 +3,8 @@
 	import { onMount } from 'svelte';
 	import { game } from '$lib/game/Game.svelte';
 	import { GenerateDemonym, GetCityClass, GetNextThreshold, toTitleCase } from '$lib/util/Util';
-	import MenuItem from '$lib/components/MenuItem.svelte';
 	import { Brain, Castle, Cog, Handshake, PersonStanding } from 'lucide-svelte';
+	import MenuItem from '$lib/components/MenuItem.svelte';
 	import TopBar from '$lib/components/TopBar.svelte';
 
 	let { children } = $props();
@@ -27,7 +27,7 @@
 
 	<div class="flex flex-grow">
 		<div
-			class="m-4 flex w-48 flex-col rounded-md border border-zinc-500/75 bg-gradient-to-tl from-zinc-700/25 to-zinc-800/25 px-3 py-4 backdrop-blur-sm"
+			class="m-4 flex w-48 min-w-48 flex-col rounded-md border border-zinc-500/75 bg-gradient-to-tl from-zinc-700/25 to-zinc-800/25 px-3 py-4 backdrop-blur-sm"
 		>
 			<div class="flex items-baseline justify-between gap-x-2 px-1">
 				<a href="/" class="font-serif text-2xl transition-all hover:text-orange-300 active:translate-y-0.5">kingdom</a>
@@ -56,7 +56,8 @@
 			<div class="mt-auto">
 				<div class="text-center">
 					<p class="font-mono">{game.Date.format('YYYY')} - {game.Date.format('MM')} - {game.Date.format('DD')}</p>
-					<p class="font-serif text-sm">{GenerateDemonym(game.PlayerCity.name)} Era</p>
+					<!-- german seems to be the most aggressively hyphenated. works well for demonyms, might cause issues later, we'll see -->
+					<p lang="de" class="hyphens-auto break-words font-serif text-sm">{GenerateDemonym(game.PlayerCity.name)} Era</p>
 				</div>
 
 				<hr class="mx-auto my-4 w-1/2 border-t-zinc-500" />

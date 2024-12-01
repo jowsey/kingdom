@@ -5,6 +5,7 @@
 	import { GetCityClass, toTitleCase } from '$lib/util/Util';
 
 	onDestroy(() => {
+		game.PlayerCity.name = game.PlayerCity.name.trim();
 		if (game.PlayerCity.name === '') {
 			game.PlayerCity.name = Game.Defaults.PlayerCity.name;
 		}
@@ -19,9 +20,11 @@
 		type="text"
 		name="kingdom-name"
 		maxlength="32"
+		autocomplete="off"
+		spellcheck="false"
 		class="w-full max-w-96 border-b border-zinc-500/75 bg-transparent p-2 font-serif text-xl outline-none"
 		placeholder={Game.Defaults.PlayerCity.name}
-		spellcheck="false"
 		bind:value={game.PlayerCity.name}
+		onfocusout={() => (game.PlayerCity.name = game.PlayerCity.name.trim())}
 	/>
 </Option>
