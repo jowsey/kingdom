@@ -77,7 +77,7 @@
 
 			<div class="mt-auto">
 				<div class="text-center">
-					<p>{game.DateState.format('YYYY')} - {game.DateState.format('MM')} - {game.DateState.format('DD')}</p>
+					<p>{game.Date.format('YYYY')} - {game.Date.format('MM')} - {game.Date.format('DD')}</p>
 					<p class="font-serif text-sm">{GenerateDemonym(game.PlayerCity.name)} Era</p>
 				</div>
 
