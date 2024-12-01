@@ -19,7 +19,7 @@
 
 <p class="mb-8 font-serif text-4xl">Options</p>
 
-<Option label="Rename your city:">
+<Option label="Rename the city:">
 	<label for="kingdomName">The {toTitleCase(GetCityClass(game.PlayerCity.people.population))} of</label>
 	<input
 		type="text"

@@ -9,6 +9,14 @@
 
 	let { children } = $props();
 
+	let season = $derived.by(() => {
+		let month = game.Date.format('MM');
+		if (month === '12' || month === '01' || month === '02') return 'Winter';
+		if (month === '03' || month === '04' || month === '05') return 'Spring';
+		if (month === '06' || month === '07' || month === '08') return 'Summer';
+		if (month === '09' || month === '10' || month === '11') return 'Autumn';
+	});
+
 	onMount(() => {
 		game.RunLoop();
 
@@ -58,6 +66,8 @@
 					<p class="font-mono">{game.Date.format('YYYY')} - {game.Date.format('MM')} - {game.Date.format('DD')}</p>
 					<!-- german seems to be the most aggressively hyphenated. works well for demonyms, might cause issues later, we'll see -->
 					<p lang="de" class="hyphens-auto break-words font-serif text-sm">{game.PlayerCity.demonym} Era</p>
+
+					<p class="pt-2 font-serif text-xs capitalize opacity-75">{season}</p>
 				</div>
 
 				<hr class="mx-auto my-4 w-1/2 border-t-zinc-500" />
