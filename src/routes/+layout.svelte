@@ -23,7 +23,7 @@
 </svelte:head>
 
 <div class="flex h-screen select-none flex-col bg-tile text-white">
-	<TopBar></TopBar>
+	<TopBar />
 
 	<div class="flex flex-grow">
 		<div

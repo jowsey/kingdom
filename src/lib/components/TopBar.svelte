@@ -20,14 +20,15 @@
 		'honorable steward, the houses are burning, and the people are cold, please stop reading the scrolling text',
 		"if you can't be good, don't get caught!",
 		'reticulating splines...',
-		'that was a really good one',
+		"that was a really good one, hope you didn't miss it",
 		"you really have no idea how long this dumb scrolling text thing took me, like, seriously, oh my god, i was here for so long, there are entire gameplay systems in this game that took me less time to implement than this stupid text bar, please just take a second to appreciate it. i'll give you as much time as you need.                    alright, cool. thanks.",
 		'your brain tricks you into thinking this text is moving',
 		'antimatter dimensions ran so we could walk',
 		"is your browser running slow? good, it'll be easier to catch",
 		'think of a number between one and ten',
 		'stan loona',
-		"you should stream syzy's debut album 'the weight of the world'"
+		"you should stream syzy's debut album 'the weight of the world'",
+		"one day, something genuinely important is gonna be in this bar, and you're gonna miss it"
 	];
 
 	let topText = $state();
@@ -85,20 +86,23 @@
 </script>
 
 <div
-	id="topbar"
-	class="grid h-12 w-full grid-cols-6 grid-rows-2 items-center justify-between gap-x-2 border-b border-zinc-800 bg-black/25 px-4 text-sm lg:h-6 lg:grid-rows-1"
+	class="grid h-12 w-full grid-cols-6 grid-rows-2 justify-between gap-x-2 border-b border-zinc-800 bg-black/25 px-4 text-sm lg:h-6 lg:grid-rows-1"
 >
-	<a class="col-span-2 flex font-mono text-blue-300 hover:text-blue-400 lg:col-span-1" target="_blank" href="https://tom.cafe">
-		https://tom.cafe
-		<ExternalLink class="h-4" />
-	</a>
+	<span class="col-span-2 flex items-center pt-1 font-mono lg:col-span-1">
+		🐱&nbsp;
+		<a class="flex items-center text-blue-300 hover:text-blue-400" target="_blank" href="https://tom.cafe">
+			tom.cafe
+			<ExternalLink class="h-3" />
+		</a>
+	</span>
 
-	<p class="col-span-6 row-start-2 text-center font-serif lg:col-span-4 lg:col-start-2 lg:row-start-1">Events will be shown here.</p>
+	<p class="col-span-6 row-start-2 content-center text-center font-serif lg:col-span-4 lg:col-start-2 lg:row-start-1">
+		Events will be shown here.
+	</p>
 
-	<div class="col-span-4 items-center overflow-hidden lg:col-span-1">
+	<div class="col-span-2 col-end-7 flex items-center overflow-hidden border-x border-zinc-800 pt-1 lg:col-span-1">
 		<p
-			id="marquee"
-			class="inline-block w-fit whitespace-pre pl-[100%] pr-64 font-mono text-xs opacity-50 transition-transform ease-linear"
+			class="w-fit whitespace-pre pl-[100%] pr-64 font-mono text-xs opacity-50 transition-transform ease-linear"
 			bind:this={textElement}
 			ontransitionend={UpdateTopText}
 		>
