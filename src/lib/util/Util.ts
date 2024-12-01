@@ -13,11 +13,12 @@ export function GenerateDemonym(name: string): string {
 	if (name.endsWith('ee')) return name.slice(0, -1) + 'an';
 	if (name.endsWith('na')) return name.slice(0, -1) + 'ese';
 	if (name.endsWith('an')) return name + 'ese';
+	if (name.endsWith('ce')) return name + 'n';
 
-	if (name.endsWith('a') || name.endsWith('e')) return name + 'n';
 	if (name.endsWith('n')) return name + 'ese';
-	if (name.endsWith('o')) return name + 'an';
 	if (name.endsWith('r')) return name + 'ic';
+	if (name.endsWith('a')) return name + 'n';
+	if (name.endsWith('o') || name.endsWith('e')) return name + 'an';
 	if (name.endsWith('d') || name.endsWith('n') || name.endsWith('l')) return name + 'ian';
 	if (name.endsWith('y') || name.endsWith('u')) return name.slice(0, -1) + 'ian';
 	return name + 'an';

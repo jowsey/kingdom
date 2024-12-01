@@ -2,7 +2,7 @@
 	import '../app.css';
 	import { onMount } from 'svelte';
 	import { game } from '$lib/game/Game.svelte';
-	import { GenerateDemonym, GetCityClass, GetNextThreshold, toTitleCase } from '$lib/util/Util';
+	import { GetCityClass, GetNextThreshold, toTitleCase } from '$lib/util/Util';
 	import { Brain, Castle, Cog, Handshake, PersonStanding } from 'lucide-svelte';
 	import MenuItem from '$lib/components/MenuItem.svelte';
 	import TopBar from '$lib/components/TopBar.svelte';
@@ -57,7 +57,7 @@
 				<div class="text-center">
 					<p class="font-mono">{game.Date.format('YYYY')} - {game.Date.format('MM')} - {game.Date.format('DD')}</p>
 					<!-- german seems to be the most aggressively hyphenated. works well for demonyms, might cause issues later, we'll see -->
-					<p lang="de" class="hyphens-auto break-words font-serif text-sm">{GenerateDemonym(game.PlayerCity.name)} Era</p>
+					<p lang="de" class="hyphens-auto break-words font-serif text-sm">{game.PlayerCity.demonym} Era</p>
 				</div>
 
 				<hr class="mx-auto my-4 w-1/2 border-t-zinc-500" />

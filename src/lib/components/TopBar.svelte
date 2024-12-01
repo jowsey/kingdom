@@ -17,7 +17,7 @@
 		"🐟🐟🐟   🦈  nooo little fishes watch outtt there's a shark right behind youu.....",
 		"rule 1 of scrolling text club: don't talk about scrolling text club",
 		'rule 2: have fun and be yourself',
-		'honorable steward, the houses are burning, and the people are cold, please stop reading the scrolling text',
+		'honorable steward, the crops are dying, and the children are going hungry, please stop reading the scrolling text',
 		"if you can't be good, don't get caught!",
 		'reticulating splines...',
 		"that was a really good one, hope you didn't miss it",
@@ -88,7 +88,7 @@
 <div
 	class="grid h-12 w-full grid-cols-6 grid-rows-2 justify-between gap-x-2 border-b border-zinc-800 bg-black/25 px-4 text-sm lg:h-6 lg:grid-rows-1"
 >
-	<span class="col-span-2 flex items-center pt-1 lg:pt-0.5 font-mono lg:col-span-1">
+	<span class="col-span-2 flex items-center pt-1 font-mono lg:col-span-1 lg:pt-0.5">
 		🐱&nbsp;
 		<a class="flex items-center text-blue-300 hover:text-blue-400" target="_blank" href="https://tom.cafe">
 			tom.cafe
