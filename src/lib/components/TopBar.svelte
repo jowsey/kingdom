@@ -88,7 +88,7 @@
 <div
 	class="grid h-12 w-full grid-cols-6 grid-rows-2 justify-between gap-x-2 border-b border-zinc-800 bg-black/25 px-4 text-sm lg:h-6 lg:grid-rows-1"
 >
-	<span class="col-span-2 flex items-center pt-1 font-mono lg:col-span-1">
+	<span class="col-span-2 flex items-center pt-1 lg:pt-0.5 font-mono lg:col-span-1">
 		🐱&nbsp;
 		<a class="flex items-center text-blue-300 hover:text-blue-400" target="_blank" href="https://tom.cafe">
 			tom.cafe
@@ -100,7 +100,7 @@
 		Events will be shown here.
 	</p>
 
-	<div class="col-span-2 col-end-7 flex items-center overflow-hidden border-x border-zinc-800 pt-1 lg:col-span-1">
+	<div class="col-span-2 col-end-7 flex items-center overflow-hidden border-x border-zinc-800 pt-0.5 lg:col-span-1">
 		<p
 			class="w-fit whitespace-pre pl-[100%] pr-64 font-mono text-xs opacity-50 transition-transform ease-linear"
 			bind:this={textElement}
