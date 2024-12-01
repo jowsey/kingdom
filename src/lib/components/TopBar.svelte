@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { ExternalLink } from 'lucide-svelte';
 	import { browser } from '$app/environment';
+	import { game } from '$lib/game/Game.svelte';
+	import { tick } from 'svelte';
 
 	const TopBarTexts = [
 		'also try minecraft!',
@@ -33,22 +35,29 @@
 		"one day, something really important is going to appear in this bar, and you'll miss it"
 	];
 
-	let topText = $state();
-
-	let textElement: HTMLElement;
+	let scrollingText = $state();
+	let scrollingTextElement: HTMLElement | undefined = $state(undefined);
 
 	let lastIndex = -1;
-	const UpdateTopText = () => {
-		textElement.style.transitionDuration = '0s';
-		textElement.style.transform = 'translateX(0)';
+	const UpdateTopText = async () => {
+		if (!scrollingTextElement) return;
 
 		let index = 0;
 		do {
 			index = Math.floor(Math.random() * TopBarTexts.length);
 		} while (index === lastIndex);
 
-		topText = TopBarTexts[index];
+		scrollingText = TopBarTexts[index];
 		lastIndex = index;
+
+		await tick();
+
+		scrollingTextElement.style.transitionDuration = '0s';
+		scrollingTextElement.style.transform = 'translateX(0)';
+
+		let scrollDuration = scrollingTextElement.getBoundingClientRect().width / 40;
+		scrollingTextElement.style.transitionDuration = `${scrollDuration}s`;
+		scrollingTextElement.style.transform = 'translateX(-100%)';
 	};
 
 	if (browser) {
@@ -56,7 +65,7 @@
 		localStorage.setItem('times-played', (timesPlayed + 1).toString());
 		timesPlayed++;
 
-		topText =
+		scrollingText =
 			timesPlayed === 1
 				? "welcome! :) make sure to check this bar every so often, it's gonna contain some REALLY important information you DON'T wanna miss."
 				: timesPlayed === 2
@@ -76,14 +85,14 @@
 											: 'welcome back!';
 	}
 
-	// we do this in effect instead of up there ^ because it runs after DOM updates (and we check DOM stuff)
 	$effect(() => {
-		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-		topText;
-
-		let scrollDuration = textElement.getBoundingClientRect().width / 40;
-		textElement.style.transitionDuration = `${scrollDuration}s`;
-		textElement.style.transform = 'translateX(-100%)';
+		console.log('toggled scrolling text');
+		if (game.Settings.enableScrollingText) {
+			console.log('^ enabled');
+			UpdateTopText();
+		} else {
+			console.log('^ disabled');
+		}
 	});
 </script>
 
@@ -102,13 +111,20 @@
 		Events will be shown here.
 	</p>
 
-	<div class="col-span-2 col-end-7 flex items-center overflow-hidden border-x border-zinc-800 pt-0.5 lg:col-span-1">
-		<p
-			class="w-fit whitespace-pre pl-[100%] pr-64 font-mono text-xs opacity-50 transition-transform ease-linear"
-			bind:this={textElement}
-			ontransitionend={UpdateTopText}
-		>
-			{topText}
-		</p>
+	<div
+		aria-disabled={!game.Settings.enableScrollingText}
+		class="col-span-2 col-end-7 flex items-center overflow-hidden border-x border-zinc-800 pt-0.5 transition-colors aria-disabled:border-x-transparent lg:col-span-1"
+	>
+		{#if game.Settings.enableScrollingText}
+			<p
+				class="w-fit whitespace-pre pl-[100%] pr-64 font-mono text-xs opacity-50 transition-transform ease-linear"
+				bind:this={scrollingTextElement}
+				ontransitionend={UpdateTopText}
+			>
+				{scrollingText}
+			</p>
+		{:else}
+			<p class="w-full text-center font-mono text-xs opacity-50" aria-label="Sad emoticon">(┬┬﹏┬┬)</p>
+		{/if}
 	</div>
 </div>
