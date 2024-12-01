@@ -4,30 +4,16 @@
 	import { game } from '$lib/game/Game.svelte';
 	import { GenerateDemonym, GetCityClass, GetNextThreshold, toTitleCase } from '$lib/util/Util';
 	import MenuItem from '$lib/components/MenuItem.svelte';
-	import { ExternalLink, Brain, Castle, Cog, Handshake, PersonStanding } from 'lucide-svelte';
-	import { TopBarTexts } from '$lib/TopBarTexts';
+	import { Brain, Castle, Cog, Handshake, PersonStanding } from 'lucide-svelte';
+	import TopBar from '$lib/components/TopBar.svelte';
 
 	let { children } = $props();
-
-	let topText = $state('"funny" text here');
 
 	onMount(() => {
 		game.RunLoop();
 
-		let lastIndex = -1;
-		let topBarInterval = setInterval(() => {
-			let index = 0;
-			do {
-				index = Math.floor(Math.random() * TopBarTexts.length);
-			} while (index === lastIndex);
-
-			topText = TopBarTexts[index];
-			lastIndex = index;
-		}, 30_000);
-
 		return () => {
 			game.StopLoop();
-			clearInterval(topBarInterval);
 		};
 	});
 </script>
@@ -37,15 +23,7 @@
 </svelte:head>
 
 <div class="flex h-screen select-none flex-col bg-tile text-white">
-	<div id="topbar" class="flex h-6 w-full items-center justify-between gap-x-8 border-b border-zinc-800 bg-black/25 px-8 font-mono text-sm">
-		<div class="gap-x-8">
-			<a target="_blank" href="https://tom.cafe">
-				https://tom.cafe
-				<ExternalLink class="h-4" />
-			</a>
-		</div>
-		<p class="text-xs opacity-50" title={`#${TopBarTexts.indexOf(topText) + 1}`}>{topText}</p>
-	</div>
+	<TopBar></TopBar>
 
 	<div class="flex flex-grow">
 		<div
@@ -93,13 +71,3 @@
 		</div>
 	</div>
 </div>
-
-<style lang="postcss">
-	#topbar * {
-		@apply flex items-center;
-	}
-
-	#topbar a {
-		@apply text-blue-300;
-	}
-</style>

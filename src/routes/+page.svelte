@@ -2,6 +2,4 @@
 	import { game } from '$lib/game/Game.svelte';
 </script>
 
-<p class="font-serif text-2xl">
-	The sun rises over {game.PlayerCity.name}.
-</p>
+<p class="font-serif text-2xl">A new settlement called {game.PlayerCity.name} is formed.</p>

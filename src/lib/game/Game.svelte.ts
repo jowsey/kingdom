@@ -5,7 +5,7 @@ export class Game {
 		PlayerCity: {
 			name: 'Unnamedia',
 			people: {
-				peasants: 3,
+				peasants: 12,
 				artisans: 0,
 				merchants: 0,
 				get population() {
@@ -33,6 +33,11 @@ export class Game {
 			const elapsed = now - lastTickTime;
 
 			let ticksQueued = Math.floor(elapsed / tickMs);
+
+			if (elapsed > 1000) {
+				console.debug(`Long delta time: ${Math.floor(elapsed)}ms (tab was probably inactive)`);
+			}
+
 			while (ticksQueued > 0) {
 				const priorYear = this.Date.year();
 				this.Date = this.Date.add(1, 'day');
@@ -60,7 +65,7 @@ export class Game {
 	private Tick() {
 		// with no other modifiers, this leaves us at ~60k peasants after ~300 years (roughly modeled after London's growth)
 		// this should trend low so that upgrades and whatnot can build on it later (after upgrades we should be hitting 100-120k ish)
-		const dailyGrowth = 0.2 + this.PlayerCity.people.population * 0.000016;
+		const dailyGrowth = 0.4 + this.PlayerCity.people.population * 0.000006;
 		this._populationBuffer += dailyGrowth;
 
 		if (this._populationBuffer >= 1) {
