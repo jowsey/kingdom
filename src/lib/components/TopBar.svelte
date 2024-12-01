@@ -35,27 +35,27 @@
 		"one day, something really important is going to appear in this bar, and you'll miss it"
 	];
 
-	let scrollingText = $state();
+	let scrollingText: string = $state('');
 	let scrollingTextElement: HTMLElement | undefined = $state(undefined);
 
-	let lastIndex = -1;
 	const UpdateTopText = async () => {
 		if (!scrollingTextElement) return;
+
+		await tick();
 
 		let index = 0;
 		do {
 			index = Math.floor(Math.random() * TopBarTexts.length);
-		} while (index === lastIndex);
+		} while (index === TopBarTexts.indexOf(scrollingText));
 
 		scrollingText = TopBarTexts[index];
-		lastIndex = index;
-
-		await tick();
 
 		scrollingTextElement.style.transitionDuration = '0s';
 		scrollingTextElement.style.transform = 'translateX(0)';
 
+		await tick();
 		let scrollDuration = scrollingTextElement.getBoundingClientRect().width / 40;
+
 		scrollingTextElement.style.transitionDuration = `${scrollDuration}s`;
 		scrollingTextElement.style.transform = 'translateX(-100%)';
 	};
@@ -85,13 +85,11 @@
 											: 'welcome back!';
 	}
 
+	// deps: game.Settings.enableScrollingText
 	$effect(() => {
-		console.log('toggled scrolling text');
+		// "jump-starts" the transition loop
 		if (game.Settings.enableScrollingText) {
-			console.log('^ enabled');
 			UpdateTopText();
-		} else {
-			console.log('^ disabled');
 		}
 	});
 </script>
