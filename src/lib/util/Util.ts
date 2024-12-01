@@ -1,5 +1,5 @@
 export function GenerateDemonym(name: string): string {
-	if(name.length === 0) return '???';
+	if (name.length === 0) return '???';
 
 	if (name.split(' ').length > 1) {
 		name = name.split(' ').pop()!;
@@ -8,11 +8,16 @@ export function GenerateDemonym(name: string): string {
 	name = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
 
 	if (name.endsWith('land')) return name.slice(0, -3) + 'ish';
-	if(name.endsWith('ee')) return name.slice(0, -1) + 'an';
-	if (name.endsWith('n')) return name + 'i';
-	if (name.endsWith('a') || name.endsWith('e') || name.endsWith('o') || name.endsWith('u')) return name + 'n';
-	if (name.endsWith('y')) return name.slice(0, -1) + 'ian';
+	if (name.endsWith('ee')) return name.slice(0, -1) + 'an';
+	if (name.endsWith('na')) return name.slice(0, -1) + 'ese';
+	if (name.endsWith('an')) return name + 'ese';
+
+	if (name.endsWith('a') || name.endsWith('e')) return name + 'n';
+	if (name.endsWith('n')) return name + 'ese';
+	if (name.endsWith('o')) return name + 'an';
+	if (name.endsWith('r')) return name + 'ic';
 	if (name.endsWith('d') || name.endsWith('n') || name.endsWith('l')) return name + 'ian';
+	if (name.endsWith('y') || name.endsWith('u')) return name.slice(0, -1) + 'ian';
 	return name + 'an';
 }
 
@@ -33,7 +38,7 @@ const cityClasses = [
 ];
 
 export function GetCityClass(population: number): string {
-	let index = populationThresholds.findIndex((threshold) => threshold > population)
+	let index = populationThresholds.findIndex((threshold) => threshold > population);
 	if (index === -1) index = populationThresholds.length;
 	return cityClasses[index - 1];
 }

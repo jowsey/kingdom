@@ -5,7 +5,7 @@ export const TopBarTexts = [
 	'not a virus, but it might infect your brain',
 	'tom says hi',
 	'known by the state of california',
-	'not a cult, usually',
+	'not a cult',
 	"probably a cult",
 	"what's good",
 	'you are not a fish',
@@ -15,4 +15,7 @@ export const TopBarTexts = [
 	'🐈',
 	"🐟",
 	"TIP: be good",
+	"TIP: have fun and be yourself",
+	"if you can't be good, don't get caught",
+	"reticulating splines",
 ];
