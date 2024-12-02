@@ -33,7 +33,9 @@
 <div class="flex h-screen select-none flex-col bg-tile text-white">
 	<TopBar />
 
-	<div class="flex flex-grow">
+	<!-- Page -->
+	<div class="flex flex-grow overflow-hidden">
+		<!-- Sidebar -->
 		<div
 			class="m-4 flex w-48 min-w-48 flex-col rounded-md border border-zinc-500/75 bg-gradient-to-tl from-zinc-700/25 to-zinc-800/25 px-3 py-4 backdrop-blur-sm"
 		>
@@ -77,8 +79,10 @@
 		</div>
 
 		<!-- Page content -->
-		<div class="container h-full flex-grow overflow-auto px-6 py-8">
-			{@render children()}
+		<div class="h-full flex-grow overflow-y-auto px-6 py-8">
+			<div class="max-w-7xl">
+				{@render children()}
+			</div>
 		</div>
 	</div>
 </div>

@@ -28,10 +28,9 @@
 		'your brain tricks you into thinking this text is moving',
 		'your brain tricks you into thinking',
 		'antimatter dimensions ran so we could crawl',
-		"is your browser running slow? good, it'll be easier to catch",
+		"is your browser running slow?     good, it'll be easier to catch",
 		'think of a number between one and ten',
 		'stan loona',
-		"you should stream syzy's debut album 'the weight of the world'",
 		"one day, something really important is going to appear in this bar, and you'll miss it"
 	];
 
@@ -85,7 +84,6 @@
 											: 'welcome back!';
 	}
 
-	// deps: game.Settings.enableScrollingText
 	$effect(() => {
 		// "jump-starts" the transition loop
 		if (game.Settings.enableScrollingText) {
@@ -94,35 +92,38 @@
 	});
 </script>
 
-<div
-	class="grid h-12 w-full grid-cols-6 grid-rows-2 justify-between gap-x-2 border-b border-zinc-800 bg-black/25 px-4 text-sm lg:h-6 lg:grid-rows-1"
->
-	<span class="col-span-2 flex items-center pt-1 font-mono lg:col-span-1 lg:pt-0.5">
-		🐱&nbsp;
-		<a class="flex items-center text-blue-300 hover:text-blue-400" target="_blank" href="https://tom.cafe">
-			tom.cafe
-			<ExternalLink class="h-3" />
-		</a>
-	</span>
-
-	<p class="col-span-6 row-start-2 content-center text-center font-serif lg:col-span-4 lg:col-start-2 lg:row-start-1">
-		Events will be shown here.
-	</p>
-
+<!-- extra layer of div prevents layout shift nonsense from rest of page -->
+<div>
 	<div
-		aria-disabled={!game.Settings.enableScrollingText}
-		class="col-span-2 col-end-7 flex items-center overflow-hidden border-x border-zinc-800 pt-0.5 transition-colors aria-disabled:border-x-transparent lg:col-span-1"
+		class="grid h-12 grid-cols-6 grid-rows-2 gap-x-2 border-b border-zinc-800 bg-black/25 px-4 text-sm transition-all lg:h-6 lg:grid-rows-1"
 	>
-		{#if game.Settings.enableScrollingText}
-			<p
-				class="w-fit whitespace-pre pl-[100%] pr-64 font-mono text-xs opacity-50 transition-transform ease-linear"
-				bind:this={scrollingTextElement}
-				ontransitionend={UpdateTopText}
-			>
-				{scrollingText}
-			</p>
-		{:else}
-			<p class="w-full text-center font-mono text-xs opacity-50" aria-label="Sad emoticon">(┬┬﹏┬┬)</p>
-		{/if}
+		<span class="col-span-2 flex items-center pt-1 font-mono transition-all lg:col-span-1 lg:pt-0.5">
+			🐱&nbsp;
+			<a class="flex items-center text-blue-300 hover:text-blue-400" target="_blank" href="https://tom.cafe">
+				tom.cafe
+				<ExternalLink class="h-3" />
+			</a>
+		</span>
+
+		<p class="col-span-6 row-start-2 content-center text-center font-serif transition-all lg:col-span-4 lg:col-start-2 lg:row-start-1">
+			Events will be shown here.
+		</p>
+
+		<div
+			aria-disabled={!game.Settings.enableScrollingText}
+			class="col-span-2 col-end-7 flex items-center overflow-hidden border-x border-zinc-800 pt-0.5 transition-all aria-disabled:border-x-transparent lg:col-span-1"
+		>
+			{#if game.Settings.enableScrollingText}
+				<p
+					class="w-fit whitespace-pre pl-[100%] pr-64 font-mono text-xs opacity-50 transition-transform ease-linear"
+					bind:this={scrollingTextElement}
+					ontransitionend={UpdateTopText}
+				>
+					{scrollingText}
+				</p>
+			{:else}
+				<p class="w-full text-right font-mono text-xs opacity-50" aria-label="Sad emoticon">(┬┬﹏┬┬)</p>
+			{/if}
+		</div>
 	</div>
 </div>
