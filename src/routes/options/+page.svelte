@@ -81,12 +81,6 @@
 		</label>
 	</OptionsCategory>
 
-	<OptionsCategory title="placeholder"></OptionsCategory>
-	<OptionsCategory title="placeholder"></OptionsCategory>
-	<OptionsCategory title="placeholder"></OptionsCategory>
-	<OptionsCategory title="placeholder"></OptionsCategory>
-	<OptionsCategory title="placeholder"></OptionsCategory>
-
 	<OptionsCategory title="Miscellaneous">
 		<input
 			bind:checked={acceptedDebugModeWarning}
