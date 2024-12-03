@@ -10,7 +10,7 @@
 	let { children } = $props();
 
 	let season = $derived.by(() => {
-		let month = game.Date.format('MM');
+		let month = game.Time.date.format('MM');
 		if (month === '12' || month === '01' || month === '02') return 'Winter';
 		if (month === '03' || month === '04' || month === '05') return 'Spring';
 		if (month === '06' || month === '07' || month === '08') return 'Summer';
@@ -65,11 +65,18 @@
 
 			<div class="mt-auto">
 				<div class="text-center">
-					<p class="font-mono">{game.Date.format('YYYY')} - {game.Date.format('MM')} - {game.Date.format('DD')}</p>
-					<!-- german seems to be the most aggressively hyphenated. works well for demonyms, might cause issues later, we'll see -->
-					<p lang="de" class="hyphens-auto break-words font-serif text-sm">{game.PlayerCity.demonym} Era</p>
+					<p class="font-mono">{game.Time.date.format('YYYY')} - {game.Time.date.format('MM')} - {game.Time.date.format('DD')}</p>
+					<div
+						class="mx-auto my-2 mt-1 h-1 w-5/6 overflow-hidden rounded-lg bg-gradient-to-r from-gray-950 from-[-15%] via-sky-300 to-gray-950 to-[115%]"
+					>
+						<div class="h-full bg-transparent shadow-[0_0_0_9999px_rgba(0,0,0,0.75)]" style="width: {game.Time.dayProgress * 100}%;"></div>
+					</div>
 
-					<p class="pt-2 font-serif text-xs capitalize opacity-75">{season}</p>
+					<div class="py-2">
+						<p class="pb-1 font-serif text-xs capitalize opacity-75">{season}</p>
+						<!-- german seems to be the most aggressively hyphenated. works well for demonyms, might cause issues later, we'll see -->
+						<p lang="de" class="hyphens-auto break-words font-serif text-sm">{game.PlayerCity.demonym} Era</p>
+					</div>
 				</div>
 
 				<hr class="mx-auto my-4 w-1/2 border-t-zinc-500" />

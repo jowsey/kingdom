@@ -111,7 +111,7 @@
 					<StyledInput id="debugPeasantPop" label="Peasant pop." type="number" bind:value={game.PlayerCity.people.peasants} />
 					<StyledInput id="debugArtisanPop" label="Artisan pop." type="number" bind:value={game.PlayerCity.people.artisans} />
 					<StyledInput id="debugMerchantPop" label="Merchant pop." type="number" bind:value={game.PlayerCity.people.merchants} />
-					<StyledInput id="debugDaysPerSecond" label="Days per second" type="number" bind:value={game.Settings.daysPerSecond} />
+					<StyledInput id="debugDaysPerSecond" label="Days per second" type="number" bind:value={game.Time.daysPerSecond} />
 				</AutoDualColumn>
 			</OptionsCategory>
 		</div>
