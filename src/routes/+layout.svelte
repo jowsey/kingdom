@@ -22,8 +22,8 @@
 		const pageAccessedViaReload = (window.performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming).type === 'reload';
 		if (!pageAccessedViaReload) {
 			let visitCount = parseInt(localStorage.getItem('visitCount') ?? '0');
-			localStorage.setItem('visitCount', (visitCount + 1).toString());
 			visitCount++;
+			localStorage.setItem('visitCount', visitCount.toString());
 		}
 
 		game.RunLoop();
