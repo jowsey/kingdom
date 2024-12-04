@@ -14,7 +14,9 @@
 
 <a
 	href={route}
-	class={`group mb-2 flex w-full gap-x-3 rounded-xl border border-zinc-500 border-opacity-0 bg-black bg-opacity-0 px-2.5 py-2 transition-all hover:bg-opacity-25 active:translate-y-0.5 ${active ? '!bg-white text-black' : ''}`}
+	class="group mb-2 flex w-full gap-x-3 rounded-xl border border-zinc-500 border-opacity-0 bg-black bg-opacity-0 px-2.5 py-2 transition-all hover:bg-opacity-25 active:translate-y-0.5"
+	class:text-black={active}
+	class:!bg-white={active}
 >
 	{#if icon}
 		{@const Icon = icon}

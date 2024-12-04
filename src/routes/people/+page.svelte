@@ -4,26 +4,26 @@
 	import { Coins, Hammer, Wheat } from 'lucide-svelte';
 </script>
 
-<p class="font-serif text-2xl">The people of {game.PlayerCity.name} are content.</p>
-<p class="text-xl">Total population: {game.PlayerCity.people.population}</p>
+<p class="font-serif text-2xl">The people of {game.City.name} are content.</p>
+<p class="text-xl">Total population: {game.TotalPopulation}</p>
 
 <div class="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-3">
 	<PeopleBox
 		icon={Wheat}
 		name="Peasants"
-		population={game.PlayerCity.people.peasants}
+		population={game.City.people.peasants}
 		description="Hard-working labourers; the backbone of your kingdom."
 	/>
 	<PeopleBox
 		icon={Hammer}
 		name="Artisans"
-		population={game.PlayerCity.people.artisans}
+		population={game.City.people.artisans}
 		description="Skilled craftsmen; producers of fine goods and essentials."
 	/>
 	<PeopleBox
 		icon={Coins}
 		name="Merchants"
-		population={game.PlayerCity.people.merchants}
+		population={game.City.people.merchants}
 		description="Traders and businessmen; they drive wealth to your kingdom."
 	/>
 </div>

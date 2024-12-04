@@ -6,6 +6,7 @@
 	import { Brain, Castle, Cog, Handshake, PersonStanding } from 'lucide-svelte';
 	import MenuItem from '$lib/components/MenuItem.svelte';
 	import TopBar from '$lib/components/TopBar.svelte';
+	import { browser } from '$app/environment';
 
 	let { children } = $props();
 
@@ -18,19 +19,30 @@
 	});
 
 	onMount(() => {
+		const pageAccessedViaReload = (window.performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming).type === 'reload';
+		if (!pageAccessedViaReload) {
+			let visitCount = parseInt(localStorage.getItem('visitCount') ?? '0');
+			localStorage.setItem('visitCount', (visitCount + 1).toString());
+			visitCount++;
+		}
+
 		game.RunLoop();
+
+		const saveFunc = () => game.SaveState(); // named to retain reference for removal
+		window.addEventListener('beforeunload', saveFunc);
 
 		return () => {
 			game.StopLoop();
+			window.removeEventListener('beforeunload', saveFunc);
 		};
 	});
 </script>
 
 <svelte:head>
-	<title>kingdom: {game.PlayerCity.name}</title>
+	<title>kingdom: {game.City.name}</title>
 </svelte:head>
 
-<div class="flex h-screen select-none flex-col bg-tile text-white">
+<div class="flex h-screen select-none flex-col bg-tile text-white" class:opacity-0={!browser}>
 	<TopBar />
 
 	<!-- Page -->
@@ -47,11 +59,11 @@
 			</div>
 
 			<div class="my-2 text-center">
-				<p class="text-sm">{toTitleCase(GetCityClass(game.PlayerCity.people.population))}</p>
-				{#if GetNextThreshold(game.PlayerCity.people.population) > 0}
+				<p class="text-sm">{toTitleCase(GetCityClass(game.TotalPopulation))}</p>
+				{#if GetNextThreshold(game.TotalPopulation) > 0}
 					<p class="text-xs opacity-50">
-						<span class="font-mono">{game.PlayerCity.people.population.toLocaleString()}</span> /
-						<span class="font-mono">{GetNextThreshold(game.PlayerCity.people.population).toLocaleString()}</span>
+						<span class="font-mono">{game.TotalPopulation.toLocaleString()}</span> /
+						<span class="font-mono">{GetNextThreshold(game.TotalPopulation).toLocaleString()}</span>
 					</p>
 				{/if}
 			</div>
@@ -66,16 +78,18 @@
 			<div class="mt-auto">
 				<div class="text-center">
 					<p class="font-mono">{game.Time.date.format('YYYY')} - {game.Time.date.format('MM')} - {game.Time.date.format('DD')}</p>
-					<div
-						class="mx-auto my-2 mt-1 h-1 w-5/6 overflow-hidden rounded-lg bg-gradient-to-r from-gray-950 from-[-15%] via-sky-300 to-gray-950 to-[115%]"
-					>
-						<div class="h-full bg-transparent shadow-[0_0_0_9999px_rgba(0,0,0,0.75)]" style="width: {game.Time.dayProgress * 100}%;"></div>
+					<div class="mx-auto my-2 mt-1 h-1 w-5/6 overflow-hidden rounded-lg bg-gradient-to-r from-gray-900 via-sky-300 to-gray-900">
+						<div
+							class="h-full bg-transparent"
+							style="width:{game.Time.dayProgress * 100}%;box-shadow:0 0 0 9999px rgb(0,0,0,{Math.min(game.Time.dayProgress * 2, 1) *
+								0.5});"
+						></div>
 					</div>
 
 					<div class="py-2">
 						<p class="pb-1 font-serif text-xs capitalize opacity-75">{season}</p>
 						<!-- german seems to be the most aggressively hyphenated. works well for demonyms, might cause issues later, we'll see -->
-						<p lang="de" class="hyphens-auto break-words font-serif text-sm">{game.PlayerCity.demonym} Era</p>
+						<p lang="de" class="hyphens-auto break-words font-serif text-sm">{game.CityDemonym} Era</p>
 					</div>
 				</div>
 

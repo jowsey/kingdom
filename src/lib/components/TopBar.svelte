@@ -60,32 +60,29 @@
 	};
 
 	if (browser) {
-		let timesPlayed = parseInt(localStorage.getItem('times-played') ?? '0');
-		localStorage.setItem('times-played', (timesPlayed + 1).toString());
-		timesPlayed++;
+		let visitCount = parseInt(localStorage.getItem('visitCount') ?? '1');
 
 		scrollingText =
-			timesPlayed === 1
+			visitCount === 1
 				? "welcome! :) make sure to check this bar every so often, it's gonna contain some REALLY important information you DON'T wanna miss."
-				: timesPlayed === 2
+				: visitCount === 2
 					? "oh, hey! you're back!"
-					: timesPlayed === 3
+					: visitCount === 3
 						? 'back for a third time, i see!'
-						: timesPlayed === 5
+						: visitCount === 5
 							? '5th time back! good to see you!'
-							: timesPlayed === 10
+							: visitCount === 10
 								? "hey, it's your 10th time back! nice!"
-								: timesPlayed === 20
+								: visitCount === 20
 									? '20th time back! always good to see you!'
-									: timesPlayed === 50
+									: visitCount === 50
 										? 'welcome ba- hey, guess what! 50th time back! nice!'
-										: timesPlayed === 100
+										: visitCount === 100
 											? 'dude i just ran the numbers and this is your 100th time back               please go outside               cheers though'
 											: 'welcome back!';
 	}
 
 	$effect(() => {
-		// "jump-starts" the transition loop
 		if (game.Settings.enableScrollingText) {
 			UpdateTopText();
 		}
@@ -105,8 +102,8 @@
 			</a>
 		</span>
 
-		<p class="col-span-6 row-start-2 content-center text-center font-serif transition-all lg:col-span-4 lg:col-start-2 lg:row-start-1">
-			Events will be shown here.
+		<p class="col-span-6 row-start-2 content-center text-center font-serif lg:col-span-4 lg:col-start-2 lg:row-start-1">
+			{game.City.name}
 		</p>
 
 		<div
