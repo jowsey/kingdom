@@ -18,7 +18,7 @@ export class Game {
 		Time: {
 			date: dayjs().year(1).month(0).date(1),
 			dayProgress: 0,
-			daysPerSecond: 0.12 // 300 years in (300 * 365) / 0.12 / (60*60) = ~253.4 hours (roughly a month of full working days, so longer in practice),
+			daysPerSecond: 0.12 // 300 years in (300 * 365) / 0.12 / (60*60) = ~253.4 hours
 		},
 		Settings: {
 			debugMode: false,
@@ -123,12 +123,12 @@ export class Game {
 	}
 
 	public GetSavedState(): typeof Game.Defaults {
-		console.debug('Loading saved state.');
-
 		if (!browser) {
-			console.debug('server env: getting default state for pre-render');
+			console.debug('Using default state for pre-render');
 			return Game.Defaults;
 		}
+
+		console.debug('Loading saved state.');
 
 		const { city, time, settings } = JSON.parse(localStorage.getItem('state') ?? '{}');
 

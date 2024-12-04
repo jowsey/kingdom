@@ -127,7 +127,7 @@
 					onclick={() => {
 						game.Settings.enableSaving = false;
 						localStorage.removeItem('state');
-						location.reload();
+						location.href = '/';
 					}}
 				>
 					Delete my save
