@@ -26,7 +26,9 @@
 			localStorage.setItem('visitCount', visitCount.toString());
 		}
 
-		game.RunLoop();
+		if (game.HasSettled) {
+			game.RunLoop();
+		}
 
 		const saveFunc = () => game.SaveState(); // named to retain reference for removal
 		window.addEventListener('beforeunload', saveFunc);
@@ -49,6 +51,7 @@
 	<div class="flex flex-grow overflow-hidden">
 		<!-- Sidebar -->
 		<div
+			class:invisible={!game.HasSettled}
 			class="m-4 flex w-48 min-w-48 flex-col rounded-md border border-zinc-500/75 bg-gradient-to-tl from-zinc-700/25 to-zinc-800/25 px-3 py-4 backdrop-blur-sm"
 		>
 			<div class="flex items-baseline justify-between gap-x-2 px-1">
