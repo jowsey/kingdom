@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { ExternalLink } from 'lucide-svelte';
-	import { browser } from '$app/environment';
 	import { game } from '$lib/game/Game.svelte';
 	import { tick } from 'svelte';
 
@@ -59,28 +58,26 @@
 		scrollingTextElement.style.transform = 'translateX(-100%)';
 	};
 
-	if (browser) {
-		let visitCount = parseInt(localStorage.getItem('visitCount') ?? '1');
+	const visitCount = parseInt(localStorage.getItem('visitCount') ?? '1');
 
-		scrollingText =
-			visitCount === 1
-				? "welcome! :) make sure to check this bar every so often, it's gonna contain some REALLY important information you DON'T wanna miss."
-				: visitCount === 2
-					? "oh, hey! you're back!"
-					: visitCount === 3
-						? 'back for a third time, i see!'
-						: visitCount === 5
-							? '5th time back! good to see you!'
-							: visitCount === 10
-								? "hey, it's your 10th time back! nice!"
-								: visitCount === 20
-									? '20th time back! always good to see you!'
-									: visitCount === 50
-										? 'welcome ba- hey, guess what! 50th time back! nice!'
-										: visitCount === 100
-											? 'dude i just ran the numbers and this is your 100th time back               please go outside               cheers though'
-											: 'welcome back!';
-	}
+	scrollingText =
+		visitCount === 1
+			? "welcome! :) make sure to check this bar every so often, it's gonna contain some REALLY important information you DON'T wanna miss."
+			: visitCount === 2
+				? "oh, hey! you're back!"
+				: visitCount === 3
+					? 'back for a third time, i see!'
+					: visitCount === 5
+						? '5th time back! good to see you!'
+						: visitCount === 10
+							? "hey, it's your 10th time back! nice!"
+							: visitCount === 20
+								? '20th time back! always good to see you!'
+								: visitCount === 50
+									? 'welcome ba- hey, guess what! 50th time back! nice!'
+									: visitCount === 100
+										? 'dude i just ran the numbers and this is your 100th time back         please go outside               cheers though'
+										: 'welcome back!';
 
 	$effect(() => {
 		if (game.Settings.enableScrollingText) {
@@ -107,10 +104,10 @@
 		</p>
 
 		<div
-			aria-disabled={!game.Settings.enableScrollingText}
+			aria-disabled={!game.Settings.enableScrollingText || !game.HasSettled}
 			class="col-span-2 col-end-7 flex items-center overflow-hidden border-x border-zinc-800 pt-0.5 transition-all aria-disabled:border-x-transparent lg:col-span-1"
 		>
-			{#if game.Settings.enableScrollingText}
+			{#if game.Settings.enableScrollingText && game.HasSettled}
 				<p
 					class="w-fit whitespace-pre pl-[100%] pr-64 font-mono text-xs opacity-50 transition-transform ease-linear"
 					bind:this={scrollingTextElement}
@@ -118,7 +115,7 @@
 				>
 					{scrollingText}
 				</p>
-			{:else}
+			{:else if game.HasSettled}
 				<p class="w-full text-right font-mono text-xs opacity-50" aria-label="Sad emoticon">(┬┬﹏┬┬)</p>
 			{/if}
 		</div>

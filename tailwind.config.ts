@@ -9,11 +9,6 @@ export default {
 				serif: ['Playfair Display', 'serif'],
 				sans: ['Cabin', 'sans-serif'],
 				mono: ['Courier Prime', 'monospace']
-			},
-			backgroundImage: () => {
-				return {
-					tile: "url('/Tile32.png')"
-				};
 			}
 		}
 	},

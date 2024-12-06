@@ -1,5 +1,4 @@
 import dayjs from 'dayjs';
-import { browser } from '$app/environment';
 import { GenerateDemonym } from '$lib/util/Util';
 
 enum Area {
@@ -32,7 +31,7 @@ export class Game {
 		Settings: {
 			debugMode: false,
 			enableScrollingText: true,
-			enableSaving: true,
+			enableSaving: false,
 			autosaveFreq: 30_000
 		}
 	};
@@ -52,8 +51,6 @@ export class Game {
 	private _animFrameReqId?: ReturnType<typeof requestAnimationFrame>;
 
 	constructor() {
-		if (!browser) return;
-
 		console.debug('Game initialized.');
 	}
 
@@ -133,11 +130,6 @@ export class Game {
 	}
 
 	public GetSavedState(): typeof Game.Defaults {
-		if (!browser) {
-			console.debug('Using default state for pre-render');
-			return Game.Defaults;
-		}
-
 		console.debug('Loading saved state.');
 
 		const { city, time, settings } = JSON.parse(localStorage.getItem('state') ?? '{}');

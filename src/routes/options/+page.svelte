@@ -6,7 +6,6 @@
 	import OptionsCategory from '$lib/components/options/OptionsCategory.svelte';
 	import StyledInput from '$lib/components/options/StyledInput.svelte';
 	import AutoDualColumn from '$lib/components/options/AutoDualColumn.svelte';
-	import { browser } from '$app/environment';
 
 	let acceptedDebugModeWarning: boolean = $state(game.Settings.debugMode);
 
@@ -23,10 +22,7 @@
 			game.City.name = Game.Defaults.City.name;
 		}
 
-		// why on earth does onDestroy run on the server and NONE of the other lifecycle methods
-		if (browser) {
-			game.SaveState();
-		}
+		game.SaveState();
 	});
 </script>
 
