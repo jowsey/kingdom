@@ -9,7 +9,7 @@
 		onfocusout?: () => void;
 	}
 
-	let { placeholder, label, id, value = $bindable(), maxLength: maxlength = 24, onfocusout, type = 'text' }: Props = $props();
+	let { placeholder, label, id, type = 'text', value = $bindable(), maxLength: maxlength = 24, onfocusout }: Props = $props();
 </script>
 
 <label for={id} class="w-fit">
