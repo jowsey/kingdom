@@ -59,7 +59,7 @@
 
 				<div class="my-2 text-center">
 					<p class="text-sm">{toTitleCase(GetCityClass(game.TotalPopulation))}</p>
-					{#if GetNextThreshold(game.TotalPopulation) > 0}
+					{#if GetNextThreshold(game.TotalPopulation) !== -1}
 						<p class="text-xs opacity-50">
 							<span class="font-mono">{game.TotalPopulation.toLocaleString()}</span> /
 							<span class="font-mono">{GetNextThreshold(game.TotalPopulation).toLocaleString()}</span>

@@ -24,30 +24,41 @@ export function GenerateDemonym(name: string): string {
 	return name + 'an';
 }
 
-const populationThresholds = [0, 50, 200, 500, 1000, 2500, 5000, 10000, 20000, 40000, 60000, 100000];
-const cityClasses = [
-	'hamlet', // 0+
-	'quiet village', // 50+
-	'growing village', // 200+
-	'budding town', // 500+
-	'bustling town', // 1000+
-	'thriving town', // 2500+
-	'nascent city', // 5000+
-	'prominent city', // 10000+
-	'renowned city', // 20000+
-	'metropolis', // 40000+
-	'grand metropolis', // 60000+
-	'capital' // 100000+
-];
+// Keys are lower bounds/minimums
+const populationThresholds = new Map([
+	[0, 'hamlet'],
+	[50, 'quiet village'],
+	[200, 'growing village'],
+	[500, 'budding town'],
+	[1000, 'bustling town'],
+	[2500, 'thriving town'],
+	[5000, 'nascent city'],
+	[10000, 'prominent city'],
+	[20000, 'renowned city'],
+	[40000, 'metropolis'],
+	[60000, 'grand metropolis'],
+	[100000, 'capital']
+]);
 
+// Current class of city based on population
 export function GetCityClass(population: number): string {
-	let index = populationThresholds.findIndex((threshold) => threshold > population);
-	if (index === -1) index = populationThresholds.length;
-	return cityClasses[index - 1];
+	let index = 0;
+	for (const [threshold] of populationThresholds) {
+		if (population >= threshold) index = threshold;
+	}
+	return populationThresholds.get(index)!;
 }
 
+// Population required to reach the next threshold
+// -1 if the population is already at the highest threshold
 export function GetNextThreshold(population: number): number {
-	return populationThresholds.find((threshold) => threshold > population) || 0;
+	for (const [threshold] of populationThresholds) {
+		if (population < threshold) {
+			return threshold;
+		}
+	}
+
+	return -1;
 }
 
 export function toTitleCase(str: string): string {
