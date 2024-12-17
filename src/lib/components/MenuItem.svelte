@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { type Icon } from 'lucide-svelte';
 
 	interface Props {
@@ -9,7 +9,7 @@
 	}
 
 	let { route, label, icon }: Props = $props();
-	let active = $derived($page.url.pathname === route);
+	let active = $derived(page.url.pathname === route);
 </script>
 
 <a
