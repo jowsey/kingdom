@@ -101,7 +101,7 @@
 
 		<!-- Page content -->
 		<div class="h-full flex-grow overflow-y-auto px-6 py-8">
-			<div class="max-w-7xl">
+			<div class="h-full max-w-7xl">
 				{@render children()}
 			</div>
 		</div>

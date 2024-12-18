@@ -5,7 +5,7 @@
 </script>
 
 <p class="font-serif text-2xl">The people of {game.City.name} are content.</p>
-<p class="text-xl">Total population: {game.TotalPopulation}</p>
+<p class="text-xl">Total population: {game.TotalPopulation.toLocaleString()}</p>
 
 <div class="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-3">
 	<PeopleBox

@@ -8,25 +8,25 @@
 	const areas = [
 		{
 			name: 'Plains',
-			image: '/Plains.png',
+			image: '/images/locations/Plains.png',
 			description: 'Wide, open fields; the perfect spot for a new settlement.',
 			inText: 'in the Plains'
 		},
 		{
 			name: 'River',
-			image: '/River.png',
+			image: '/images/locations/River.png',
 			description: 'Flows rich with opportunity for farming and trade.',
 			inText: 'on the River'
 		},
 		{
 			name: 'Desert',
-			image: '/Desert.png',
+			image: '/images/locations/Desert.png',
 			description: 'Arid climate with few natural resources.',
 			inText: 'in the Desert'
 		},
 		{
 			name: 'Coastal',
-			image: '/Coastal.png',
+			image: '/images/locations/Coastal.png',
 			description: 'An idyllic beach with direct connections to the sea.',
 			inText: 'on the Coast'
 		}
