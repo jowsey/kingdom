@@ -104,25 +104,20 @@
 		}
 	];
 
-	function prepareCytoscapeData(upgrades: UpgradeNode[]) {
-		const nodes = upgrades.map((upgrade) => ({
-			data: upgrade
-		}));
+	const nodes: cytoscape.NodeDefinition[] = upgradeNodes.map((upgrade) => ({
+		data: upgrade
+	}));
 
-		const edges = upgrades.flatMap((upgrade) =>
-			upgrade.requirements.map((reqId) => ({
-				data: {
-					id: `${reqId}-${upgrade.id}`, // Unique ID for each edge
-					source: reqId,
-					target: upgrade.id
-				}
-			}))
-		);
+	const edges: cytoscape.EdgeDefinition[] = upgradeNodes.flatMap((upgrade) =>
+		upgrade.requirements.map((reqId) => ({
+			data: {
+				id: `${reqId}-${upgrade.id}`,
+				source: reqId,
+				target: upgrade.id
+			}
+		}))
+	);
 
-		return { nodes, edges };
-	}
-
-	const { nodes, edges } = prepareCytoscapeData(upgradeNodes);
 	const elements = [...nodes, ...edges];
 
 	let cyContainer: HTMLElement;
