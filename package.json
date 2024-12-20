@@ -13,7 +13,7 @@
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^3.0.0",
-		"@sveltejs/kit": "^2.12.2",
+		"@sveltejs/kit": "^2.13.0",
 		"@sveltejs/vite-plugin-svelte": "^5.0.3",
 		"@types/bun": "^1.1.14",
 		"@types/cytoscape": "^3.21.8",
@@ -27,19 +27,19 @@
 		"prettier": "^3.4.2",
 		"prettier-plugin-svelte": "^3.2.6",
 		"prettier-plugin-tailwindcss": "^0.6.9",
-		"svelte": "^5.14.4",
+		"svelte": "^5.15.0",
 		"svelte-check": "^4.1.1",
 		"tailwindcss": "^3.4.17",
 		"typescript": "^5.0.0",
 		"typescript-eslint": "^8.18.1",
-		"vite": "^6.0.3",
+		"vite": "^6.0.5",
 		"vite-plugin-lucide-preprocess": "^1.2.3"
 	},
 	"dependencies": {
 		"cytoscape": "^3.30.4",
 		"cytoscape-dagre": "^2.5.0",
 		"dayjs": "^1.11.13",
-		"lucide-svelte": "^0.468.0",
+		"lucide-svelte": "^0.469.0",
 		"panzoom": "^9.4.3"
 	}
 }

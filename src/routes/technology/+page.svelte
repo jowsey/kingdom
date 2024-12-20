@@ -2,6 +2,7 @@
 	import cytoscape from 'cytoscape';
 	import dagre from 'cytoscape-dagre';
 	import { onMount } from 'svelte';
+	import { blur } from 'svelte/transition';
 
 	cytoscape.use(dagre);
 
@@ -122,6 +123,9 @@
 
 	let cyContainer: HTMLElement;
 
+	let selectedNode: cytoscape.NodeSingular | null = $state(null);
+	let popupPosition = $state({ x: 0, y: 0 });
+
 	onMount(() => {
 		const cy = cytoscape({
 			container: cyContainer,
@@ -136,16 +140,20 @@
 						label: 'data(id)',
 						color: '#fff',
 						width: (ele: cytoscape.NodeSingular) => (ele.data('isCategory') ? 128 : 64),
-						height: (ele: cytoscape.NodeSingular) => (ele.data('isCategory') ? 128 : 64)
+						height: (ele: cytoscape.NodeSingular) => (ele.data('isCategory') ? 128 : 64),
+
+						'font-size': (ele: cytoscape.NodeSingular) => (ele.data('isCategory') ? 20 : 16),
+						'text-margin-y': 12,
+						'text-valign': 'bottom',
+						'font-family': (ele: cytoscape.NodeSingular) => (ele.data('isCategory') ? 'Playfair Display' : 'Cabin'),
+						'font-weight': (ele: cytoscape.NodeSingular) => (ele.data('isCategory') ? 400 : 500)
 					}
 				},
 				{
-					selector: 'labels',
+					selector: 'node:active, edge:active',
 					style: {
-						'font-size': (ele: cytoscape.EdgeSingular) => (ele.data('isCategory') ? 20 : 16),
-						'text-margin-y': 8,
-						'text-valign': 'bottom',
-						'font-family': 'Cabin'
+						// prevents black box on click https://js.cytoscape.org/#style/overlay
+						'overlay-opacity': 0
 					}
 				},
 				{
@@ -169,20 +177,41 @@
 				spacingFactor: 1.5
 			},
 			autoungrabify: true,
-			wheelSensitivity: 0.1,
 			zoom: 2
 		});
 
+		// hack for cursor: pointer
+		cy.on('mouseover', 'node', (event) => {
+			event.cy.container()!.style.cursor = 'pointer';
+		});
+
+		cy.on('mouseout', 'node', (event) => {
+			event.cy.container()!.style.cursor = 'default';
+		});
+
+		// keep tooltip aligned with moving node
+		cy.on('pan', () => {
+			if (selectedNode !== null) {
+				popupPosition = {
+					x: selectedNode.renderedPosition().x,
+					y: selectedNode.renderedPosition().y
+				};
+			}
+		});
+
 		cy.on('tap', 'node', (event) => {
-			const node = event.target;
+			const node: cytoscape.NodeSingular = event.target;
 			const data: UpgradeNode = node.data();
 
-			if (data.unlocked) {
-				console.log(`Upgrading ${data.id}`);
-			} else {
-				console.log(`Unlocking ${data.id}`);
-				data.unlocked = true;
+			if (data.isCategory) {
+				return;
 			}
+
+			selectedNode = node;
+			popupPosition = {
+				x: node.renderedPosition().x,
+				y: node.renderedPosition().y
+			};
 		});
 
 		return () => {
@@ -194,3 +223,14 @@
 <p class="font-serif text-2xl">The court scholars are eager to study.</p>
 
 <div bind:this={cyContainer} class="w-xl h-full"></div>
+
+{#if selectedNode}
+	<div
+		transition:blur={{ duration: 100 }}
+		class="absolute max-w-96 origin-top-left rounded-lg border border-zinc-600 bg-zinc-900 px-4 py-2 shadow-md"
+		style="top: {popupPosition.y}px; left: {popupPosition.x}px"
+	>
+		<button onclick={() => (selectedNode = null)}>[x]</button>
+		<p>{JSON.stringify(selectedNode.data())}</p>
+	</div>
+{/if}
