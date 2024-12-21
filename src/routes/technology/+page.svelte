@@ -214,6 +214,12 @@
 			};
 		});
 
+		cy.on('tap', (event) => {
+			if (event.target === cy) {
+				selectedNode = null;
+			}
+		});
+
 		return () => {
 			cy.destroy();
 		};
