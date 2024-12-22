@@ -74,7 +74,7 @@
 				<MenuItem route="/" label="City" icon={Castle} />
 				<MenuItem route="/people" label="People" icon={PersonStanding} />
 				<MenuItem route="/council" label="Council" icon={Handshake} />
-				<MenuItem route="/technology" label="Technology" icon={Brain} />
+				<MenuItem route="/research" label="Research" icon={Brain} />
 
 				<div class="mt-auto">
 					<div class="text-center">
