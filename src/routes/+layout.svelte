@@ -40,7 +40,9 @@
 </svelte:head>
 
 <div class="flex h-screen select-none flex-col text-white">
-	<TopBar />
+	{#if game.HasSettled}
+		<TopBar />
+	{/if}
 
 	<!-- Page -->
 	<div class="flex flex-grow overflow-hidden">
