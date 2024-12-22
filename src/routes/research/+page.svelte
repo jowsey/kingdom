@@ -3,6 +3,8 @@
 	import dagre from 'cytoscape-dagre';
 	import { onMount } from 'svelte';
 	import { blur } from 'svelte/transition';
+	import { CityClass, GetCityClass } from '$lib/util/Util';
+	import { game } from '$lib/game/Game.svelte';
 
 	cytoscape.use(dagre);
 
@@ -224,9 +226,41 @@
 			cy.destroy();
 		};
 	});
+
+	let flavorText = $derived.by(() => {
+		const cityClass = GetCityClass(game.TotalPopulation);
+
+		// todo maybe make these based on something other than population (num. upgrades unlocked?)
+		switch (cityClass) {
+			case CityClass.Hamlet:
+				return 'There must be a better way...';
+			case CityClass.QuietVillage:
+				return 'New techniques may help us survive.';
+			case CityClass.GrowingVillage:
+				return 'New ideas begin to emerge.';
+			case CityClass.BuddingTown:
+				return 'We must find new ways to provide for all.';
+			case CityClass.BustlingTown:
+				return 'The path to progress is clear.';
+			case CityClass.ThrivingTown:
+				return 'We have come far, but there is still much to do.';
+			case CityClass.NascentCity:
+				return 'Simple ideas lead to grand discoveries.';
+			case CityClass.ProminentCity:
+				return 'New frontiers await.';
+			case CityClass.RenownedCity:
+				return 'Vast foundations have been laid.';
+			case CityClass.Metropolis:
+				return 'The pursuit of knowledge leads us to greatness.';
+			case CityClass.GrandMetropolis:
+				return 'The future is ours.';
+			case CityClass.Capital:
+				return 'We stand on the shoulders of giants.';
+		}
+	});
 </script>
 
-<p class="font-serif text-2xl">The court scholars are eager to study.</p>
+<p class="font-serif text-2xl">{flavorText}</p>
 
 <div bind:this={cyContainer} class="w-xl h-full"></div>
 
