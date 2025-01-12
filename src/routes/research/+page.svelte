@@ -1,8 +1,9 @@
 <script lang="ts">
-	import cytoscape from 'cytoscape';
+	import cytoscape, { type NodeDataDefinition } from 'cytoscape';
 	import dagre from 'cytoscape-dagre';
 	import { onMount } from 'svelte';
 	import { blur } from 'svelte/transition';
+	import { XIcon } from 'lucide-svelte';
 	import { CityClass, GetCityClass } from '$lib/util/Util';
 	import { game } from '$lib/game/Game.svelte';
 
@@ -28,12 +29,13 @@
 		DurableTools: 'Durable Tools'
 	};
 
-	interface UpgradeNode {
+	interface UpgradeNode extends NodeDataDefinition {
 		id: string;
 		unlocked?: boolean;
 		requirements: string[];
 		imageUrl?: string;
 		isCategory?: boolean;
+		description?: string;
 	}
 
 	const upgradeNodes: UpgradeNode[] = [
@@ -88,12 +90,13 @@
 		{
 			id: Upgrades.Smithing,
 			requirements: [Upgrades.Categories.Industry],
-			imageUrl: 'https://placehold.co/800'
+			imageUrl: 'https://placehold.co/800',
+			description: "Creating useful tools from metals and ores."
 		},
 		{
 			id: Upgrades.Steel,
 			requirements: [Upgrades.Smithing],
-			imageUrl: 'https://placehold.co/900'
+			imageUrl: 'https://placehold.co/900',
 		},
 		{
 			id: Upgrades.PlateArmour,
@@ -108,14 +111,14 @@
 	];
 
 	const nodes: cytoscape.NodeDefinition[] = upgradeNodes.map((upgrade) => ({
-		data: upgrade
+		data: upgrade,
 	}));
 
 	const edges: cytoscape.EdgeDefinition[] = upgradeNodes.flatMap((upgrade) =>
-		upgrade.requirements.map((reqId) => ({
+		upgrade.requirements.map((req) => ({
 			data: {
-				id: `${reqId}-${upgrade.id}`,
-				source: reqId,
+				id: `${req}-${upgrade.id}`,
+				source: req,
 				target: upgrade.id
 			}
 		}))
@@ -205,9 +208,7 @@
 			const node: cytoscape.NodeSingular = event.target;
 			const data: UpgradeNode = node.data();
 
-			if (data.isCategory) {
-				return;
-			}
+			if (data.isCategory) return;
 
 			selectedNode = node;
 			popupPosition = {
@@ -245,17 +246,17 @@
 			case CityClass.ThrivingTown:
 				return 'We have come far, but there is still much to do.';
 			case CityClass.NascentCity:
-				return 'Simple ideas lead to grand discoveries.';
+				return 'Simple ideas can lead to great discoveries.';
 			case CityClass.ProminentCity:
-				return 'New frontiers await.';
+				return 'The future is bright.';
 			case CityClass.RenownedCity:
 				return 'Vast foundations have been laid.';
 			case CityClass.Metropolis:
-				return 'The pursuit of knowledge leads us to greatness.';
+				return 'Through knowledge, we prosper.';
 			case CityClass.GrandMetropolis:
-				return 'The future is ours.';
-			case CityClass.Capital:
 				return 'We stand on the shoulders of giants.';
+			case CityClass.Capital:
+				return 'The future is ours.';
 		}
 	});
 </script>
@@ -267,10 +268,17 @@
 {#if selectedNode}
 	<div
 		transition:blur={{ duration: 100 }}
-		class="absolute max-w-96 origin-top-left rounded-lg border border-zinc-600 bg-zinc-900 px-4 py-2 shadow-md"
+		class="absolute w-96 origin-top-left rounded-lg border border-zinc-600 bg-zinc-900 px-4 py-2 shadow-md"
 		style="top: {popupPosition.y}px; left: {popupPosition.x}px"
 	>
-		<button onclick={() => (selectedNode = null)}>[x]</button>
-		<p>{JSON.stringify(selectedNode.data())}</p>
+		<div class="flex justify-between align-baseline">
+			<p class="text-lg font-bold">{selectedNode.data().id}</p>
+			<button onclick={() => (selectedNode = null)} class="self-end hover:text-red-500 transition-colors">
+				<XIcon />
+			</button>
+		</div>
+		<hr class="my-2 border-zinc-600" />
+
+		<p>{selectedNode.data().description}</p>
 	</div>
 {/if}
